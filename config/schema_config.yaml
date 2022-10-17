@@ -1,0 +1,15 @@
+case:
+  represented_as: node
+  preferred_id: id
+  label_in_input: Subject
+
+phenotypic feature:
+  represented_as: node
+  preferred_id: hp
+  label_in_input: Phenotype
+
+subject to phenotype association:
+  is_a: association
+  represented_as: edge
+  preferred_id: id
+  label_in_input: HAS_PHENOTYPE

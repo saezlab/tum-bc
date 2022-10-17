@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "tum-bc"
+version = "0.1.0"
+description = ""
+authors = ["Sebastian Lobentanzer <sebastian.lobentanzer@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+biocypher = { git = "https://github.com/saezlab/BioCypher.git", branch = "main" }
+# biocypher = {path = "../BioCypher", develop = true}
+black = "^22.10.0"
+pandas = "^1.5.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

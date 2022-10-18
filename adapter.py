@@ -28,10 +28,8 @@ class BioCypherAdapter:
         # read driver
         self.driver = nu.Driver(
             db_name="neo4j",
-            db_uri="bolt://localhost:7687",
-            db_user="neo4j",
-            db_passwd="your_password_here",
-            multi_db=False,
+            config="config/neo4j_config.yaml",
+            multi_db=False,  # set to True if on Neo4j>4.0
             max_connection_lifetime=7200,
         )
 

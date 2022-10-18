@@ -8,7 +8,7 @@ phenotypic feature:
   preferred_id: hp
   label_in_input: Phenotype
 
-subject to phenotype association:
+case to phenotype association:
   is_a: association
   represented_as: edge
   preferred_id: id

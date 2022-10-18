@@ -70,7 +70,7 @@ class BioCypherAdapter:
         """
 
         # generator
-        def edge_generator():
+        def case_to_phenotype_generator():
             with self.driver.session() as session:
                 query = (
                     "MATCH (s:Subject)<-[:HAS_ENROLLED]-(:Project {acronym: 'MIMIC'}) "
@@ -88,7 +88,28 @@ class BioCypherAdapter:
                     yield (None, _src_id, _tar_id, _label, {})
 
         # write edges
-        self.bcy.write_edges(edge_generator(), db_name=self.db_name)
+        self.bcy.write_edges(
+            case_to_phenotype_generator(), db_name=self.db_name
+        )
+
+        # generator
+        def phenotype_to_phenotype_generator():
+            with self.driver.session() as session:
+                query = (
+                    "MATCH (child:Phenotype)-[:HAS_PARENT]->(parent:Phenotype) "
+                    "RETURN child.id AS child, parent.id AS parent"
+                )
+                result = session.run(query)
+                for row in result:
+                    _src_id = self._process_id(row["child"], "Phenotype")
+                    _tar_id = self._process_id(row["parent"], "Phenotype")
+                    _label = "IS_A"
+                    yield (None, _src_id, _tar_id, _label, {})
+
+        # write edges
+        self.bcy.write_edges(
+            phenotype_to_phenotype_generator(), db_name=self.db_name
+        )
 
     def _process_id(self, _id, node_label):
         """

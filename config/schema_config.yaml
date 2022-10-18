@@ -13,3 +13,11 @@ case to phenotype association:
   represented_as: edge
   preferred_id: id
   label_in_input: HAS_PHENOTYPE
+  label_as_edge: HAS_PHENOTYPE
+
+phenotype to phenotype association:
+  is_a: association
+  represented_as: edge
+  preferred_id: id
+  label_in_input: IS_A
+  label_as_edge: IS_A

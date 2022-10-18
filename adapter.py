@@ -57,11 +57,7 @@ class BioCypherAdapter:
                     query = f"MATCH (n:{node_label}) RETURN n.id as id"
                     result = session.run(query)
                     for row in result:
-                        _id = str(row["id"])
-                        if node_label == "Subject":
-                            _id = f"case:{_id}"
-                        elif node_label == "Phenotype":
-                            _id = _id.lower()
+                        _id = self._process_id(row["id"], node_label)
                         _label = node_label
                         _properties = {}
                         yield (_id, _label, _properties)
@@ -86,10 +82,22 @@ class BioCypherAdapter:
                 )
                 result = session.run(query)
                 for row in result:
-                    _src_id = row["s"]["id"]
-                    _tar_id = row["p"]["id"]
+                    _src_id = self._process_id(row["s"]["id"], "Subject")
+                    _tar_id = self._process_id(row["p"]["id"], "Phenotype")
                     _label = "HAS_PHENOTYPE"
                     yield (None, _src_id, _tar_id, _label, {})
 
         # write edges
         self.bcy.write_edges(edge_generator(), db_name=self.db_name)
+
+    def _process_id(self, _id, node_label):
+        """
+        Make IDs more uniform, prefixes lowecase.
+        """
+
+        if node_label == "Subject":
+            _id = f"case:{_id}"
+        elif node_label == "Phenotype":
+            _id = _id.lower()
+
+        return _id

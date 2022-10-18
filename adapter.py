@@ -57,7 +57,11 @@ class BioCypherAdapter:
                     query = f"MATCH (n:{node_label}) RETURN n.id as id"
                     result = session.run(query)
                     for row in result:
-                        _id = row["id"]
+                        _id = str(row["id"])
+                        if node_label == "Subject":
+                            _id = f"case:{_id}"
+                        elif node_label == "Phenotype":
+                            _id = _id.lower()
                         _label = node_label
                         _properties = {}
                         yield (_id, _label, _properties)

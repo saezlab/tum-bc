@@ -24,4 +24,6 @@ python script.py
 The adapter needs to connect to a running instance of the CKG Neo4j graph. The
 authentication for the connection to Neo4j can be configured in the
 `adapter.py` file (in the "read driver" instantiation) or by passing a
-configuration file.
+configuration file. If everything goes alright, the adapter will write six CSV
+files to the a subfolder (datetime) of the `biocypher-out` directory. Three of
+these files contain the headers while the other three contain the data.

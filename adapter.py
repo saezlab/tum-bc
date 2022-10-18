@@ -19,7 +19,7 @@ class BioCypherAdapter:
             offline=True,  # set offline to true,
             # connect to running DB for input data via the neo4j driver
             user_schema_config_path=user_schema_config_path,
-            delimiter="¦",
+            delimiter=",",
         )
         # start writer
         self.bcy.start_bl_adapter()

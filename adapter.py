@@ -92,7 +92,7 @@ class BioCypherAdapter:
 
     def _process_id(self, _id, node_label):
         """
-        Make IDs more uniform, prefixes lowecase.
+        Make IDs more uniform, prefixes lowercase.
         """
 
         if node_label == "Subject":

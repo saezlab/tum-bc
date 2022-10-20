@@ -21,6 +21,8 @@ activated), you can run the pipeline with the following command:
 python script.py
 ```
 
+Should the environment not be active, activate it using `poetry shell`.
+
 The adapter needs to connect to a running instance of the CKG Neo4j graph. The
 authentication for the connection to Neo4j can be configured in the
 configuration file (`config/neo4j_config.yaml`) or directly in the `adapter.py`
